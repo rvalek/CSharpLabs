@@ -2,24 +2,90 @@
 
 namespace cpu_model.core {
     internal class Model {
-        public static int lowestpriority = 0;
-        public static int highestPriority = 10;
-
-        public Random Rand {
-            get; set;
+        /// <summary></summary>
+        /// Конструктор: создание модели
+        /// Аргументы – параметры модели
+        /// </summary>
+        public Model(double it, int burstMin, int burstMax) {
+            // создание компонентов модели
+            ClockGen = new ClockGenerator();
+            Cpu = new CPU();
+            ReadyQueue = new PQHashTable<Process>();
+            CpuScheduler = new CPUScheduler(Cpu, ReadyQueue);
+            ProcessRand = new Random();
+            // сохранение параметров системы
+            intensityThreshold = it;
+            this.burstMin = burstMin;
+            this.burstMax = burstMax;
         }
 
         /// <summary>
-        /// ссылка на приоритетную очередь выбранного типа
+        /// действия модели на такте работы
         /// </summary>
-        public PriorityQueue<int> PriorQueue {
-            get; set;
+        public void NextTime() {
+            ClockGen.NextTime(); // увеличивается номер такта
+            if (ProcessRand.NextDouble() > intensityThreshold) {
+                // порог интенсивности поступления процессов не превышен
+
+                // создаётся новый процесс
+                Process newProcess = new Process(ClockGen.Clock) {
+                    // генерируется интервал обслуживания процесса процессором
+                    BurstTime = ProcessRand.Next(burstMin, burstMax + 1)
+                };
+                // и помещается в очередь готовых процессов
+                ReadyQueue.Put(newProcess);
+            }
+            // выполняется шаг работы центрального процессора
+            Cpu.NextTime();
+            // если требуется перепланировка
+            if (RedevelopmentNeed()) {
+                // вызвается планировщик центрального процессора
+                CpuScheduler.NextTime();
+            }
+        }
+        public void Clear() {
+            ClockGen.Clear();
+            Cpu.Clear();
+            ReadyQueue.Clear();
         }
 
-        public Model() {
-            PriorQueue = new PQHashTable<int>(lowestpriority, highestPriority);
-            Rand = new Random();
+        // вспомогательный метод, определяющий, требуется ли перепланировка
+        private bool RedevelopmentNeed() {
+            return (Cpu.Free() || Cpu.RunningProcess.WorkTime ==
+            Cpu.RunningProcess.BurstTime);
         }
 
+
+        public ClockGenerator ClockGen {
+            get;
+        }
+        public CPU Cpu {
+            get;
+        }
+        public CPUScheduler CpuScheduler {
+            get;
+        }
+        public PriorityQueue<Process> ReadyQueue {
+            get;
+        }
+        public Random ProcessRand {
+            get;
+        }
+
+        /// <summary>
+        /// параметры модели
+        /// </summary>
+        /// <summary>
+        /// Порог интенсивности поступления процессов
+        /// </summary>
+        private readonly double intensityThreshold;
+        /// <summary>
+        /// Минимальная величина интервала обслуживания
+        /// </summary>
+        private readonly int burstMin;
+        /// <summary>
+        /// Максимальная величина интервала обслуживания
+        /// </summary>
+        private readonly int burstMax;
     }
 }
