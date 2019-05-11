@@ -5,17 +5,10 @@ namespace cpu_model.core {
     internal class PQHashTable<TEntity> : PriorityQueue<TEntity> where TEntity : IComparable {
         private LinkedList<TEntity>[] body;
         private int topPriority = -1;
-        public new int Count {
-            get {
-                base.Count();
-                return Count;
-            }
-            private set {
-            }
-        }
+        private int count = 0;
 
         public PQHashTable(int lowestPriority, int highestPriority) {
-            int size = 1 + lowestPriority - highestPriority;
+            int size = 1 + highestPriority - lowestPriority;
             body = new LinkedList<TEntity>[size];
         }
 
@@ -31,22 +24,24 @@ namespace cpu_model.core {
             body[index].AddFirst(e);
 
             topPriority = index > topPriority ? index : topPriority;
-            Count += 1;
+            count += 1;
         }
 
         public override TEntity Item() {
+            base.Item();
+
             return body[topPriority].Last.Value;
         }
 
         public override void Clear() {
             base.Clear();
 
-            for (int i = body.Length; i >= 0; i -= 1) {
+            for (int i = body.Length - 1; i >= 0; i -= 1) {
                 body[i] = null;
             }
             topPriority = -1;
 
-            Count = 0;
+            count = 0;
         }
 
         public override void Remove() {
@@ -60,7 +55,12 @@ namespace cpu_model.core {
                 topPriority = findCurrentTop();
             }
 
-            Count -= 1;
+            count -= 1;
+        }
+
+        public override int Count() {
+            base.Count();
+            return count;
         }
 
         private int findCurrentTop() {

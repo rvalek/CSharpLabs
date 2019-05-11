@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="core\PQHashTable.cs" />
     <Compile Include="core\Model.cs" />
     <Compile Include="core\PriorityQueue.cs" />
     <Compile Include="Form1.cs">
