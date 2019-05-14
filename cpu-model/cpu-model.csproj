@@ -46,9 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="core\CPUScheduler.cs" />
+    <Compile Include="core\CPU.cs" />
+    <Compile Include="core\ClockGenerator.cs" />
     <Compile Include="core\PQHashTable.cs" />
     <Compile Include="core\Model.cs" />
     <Compile Include="core\PriorityQueue.cs" />
+    <Compile Include="core\Process.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

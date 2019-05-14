@@ -25,7 +25,7 @@ namespace cpu_model.core {
     /// Empty(Clear) = true
     /// </summary>
     /// 
-    internal abstract class PriorityQueue<T> where T : IComparable {
+    internal abstract class PriorityQueue<T> {
         /// <summary>
         /// require: !empty();
         /// </summary>

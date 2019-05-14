@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace cpu_model.core {
-    internal class PQHashTable<TEntity> : PriorityQueue<TEntity> where TEntity : IComparable {
+    internal class PQHashTable<TEntity> : PriorityQueue<TEntity> {
         private LinkedList<TEntity>[] body;
         private int topPriority = -1;
         private int count = 0;
@@ -23,7 +23,7 @@ namespace cpu_model.core {
 
             body[index].AddFirst(e);
 
-            topPriority = index > topPriority ? index : topPriority;
+            topPriority = index < topPriority ? index : topPriority;
             count += 1;
         }
 

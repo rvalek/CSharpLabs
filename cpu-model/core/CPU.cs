@@ -1,10 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.Contracts;
 
 namespace cpu_model.core {
-    class CPU {
+    internal class CPU {
+        public bool IsFree {
+            get; internal set;
+        }
+
+        public Process RunningProcess {
+            get; internal set;
+        }
+
+        public CPU() {
+        }
+
+        public void NextTime() {
+            Contract.Requires<QueueException>(!IsFree, "Нарушение контракта: процессор свободен при выполнении очередного шага.");
+            Contract.Ensures(RunningProcess.ExecutionTime == Contract.OldValue<int>(RunningProcess.ExecutionTime) + 1);
+
+            RunningProcess.ExecutionTime += 1;
+        }
+
+        public void Clear() {
+            RunningProcess = null;
+            IsFree = true;
+        }
     }
 }

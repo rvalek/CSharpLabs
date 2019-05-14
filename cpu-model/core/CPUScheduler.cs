@@ -1,10 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace cpu_model.core {
+    internal class CPUScheduler {
+        private readonly CPU Cpu;
+        private readonly PriorityQueue<Process> ProcessQueue;
 
-namespace cpu_model.core {
-    class Class1 {
+        public CPUScheduler(CPU cpu, PriorityQueue<Process> processQueue) {
+            Cpu = cpu;
+            ProcessQueue = processQueue;
+        }
+
+        public void NextTime() {
+            ProcessQueue.Remove();
+
+            if (!ProcessQueue.Empty()) {
+                Cpu.RunningProcess = ProcessQueue.Item();
+                Cpu.RunningProcess.SetActive();
+            } else {
+                Cpu.Clear();
+            }
+
+            // update all waiting processes ?
+            //for (int i = ProcessQueue.Count() - 1; i >= 0; i -= 1) {
+
+            //}
+        }
+
     }
 }
