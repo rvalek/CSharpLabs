@@ -27,6 +27,10 @@
         public void SetReady() {
             Status = ProcStatus.Ready;
         }
+
+        public override int GetHashCode() {
+            return Priority;
+        }
     }
 }
 

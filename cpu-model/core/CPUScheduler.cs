@@ -9,9 +9,8 @@
         }
 
         public void NextTime() {
-            ProcessQueue.Remove();
-
             if (!ProcessQueue.Empty()) {
+                ProcessQueue.Remove();
                 Cpu.RunningProcess = ProcessQueue.Item();
                 Cpu.RunningProcess.SetActive();
             } else {

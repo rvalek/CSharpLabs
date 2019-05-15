@@ -12,25 +12,25 @@ namespace cpu_model.core {
         private readonly double intensityThreshold;
         private readonly int burstMin;
         private readonly int burstMax;
-
-        private readonly int processPriorityMin = 0;
-        private readonly int processPriorityMax = 9;
+        private readonly int priorityMin;
+        private readonly int priorityMax;
 
         /// <summary></summary>
         /// Конструктор: создание модели
         /// Аргументы – параметры модели
         /// </summary>
-        public Model(double _intensityThreshol, int _burstMin, int _burstMax) {
+        public Model(double _intensityThreshold, int _burstMin, int _burstMax, int _priorityMin, int _priorityMax) {
             // создание компонентов модели
             ClockGen = new ClockGenerator();
             Cpu = new CPU();
-            ReadyQueue = new PQHashTable<Process>(processPriorityMin, processPriorityMax);
+            ReadyQueue = new PQHashTable<Process>(_priorityMin, _priorityMax);
             CpuScheduler = new CPUScheduler(Cpu, ReadyQueue);
 
-            // сохранение параметров системы
-            intensityThreshold = _intensityThreshol;
+            intensityThreshold = _intensityThreshold;
             burstMin = _burstMin;
             burstMax = _burstMax;
+            priorityMin = _priorityMin;
+            priorityMax = _priorityMax;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace cpu_model.core {
                     // генерируется интервал обслуживания процесса процессором
                     BurstTime = rand.Next(burstMin, burstMax + 1),
                     // и приоритет
-                    Priority = rand.Next(processPriorityMin, processPriorityMax + 1)
+                    Priority = rand.Next(priorityMin, priorityMax + 1)
                 });
             }
 

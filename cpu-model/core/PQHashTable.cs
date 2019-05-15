@@ -45,6 +45,7 @@ namespace cpu_model.core {
         }
 
         public override void Remove() {
+            // ??? DON'T DEAD OPEN INSIDE
             base.Remove();
 
             if (body[topPriority].Count > 1) {
@@ -73,6 +74,9 @@ namespace cpu_model.core {
             return -1;
         }
 
+        //public new bool Empty() {
+        //    return Count() == 0;
+        //}
 
         public override TEntity[] ToArray() {
             throw new NotImplementedException();
