@@ -228,9 +228,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(610, 29);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.Size = new System.Drawing.Size(95, 13);
             this.label8.TabIndex = 5;
-            this.label8.Text = "HPF __";
+            this.label8.Text = "HPF w/o extrusion";
             // 
             // label9
             // 
@@ -282,9 +282,33 @@
             this.pq_ArrivalTime});
             this.readyProcessesView.Location = new System.Drawing.Point(12, 80);
             this.readyProcessesView.Name = "readyProcessesView";
-            this.readyProcessesView.Size = new System.Drawing.Size(489, 291);
+            this.readyProcessesView.Size = new System.Drawing.Size(437, 291);
             this.readyProcessesView.TabIndex = 8;
             this.readyProcessesView.UseCompatibleStateImageBehavior = false;
+            this.readyProcessesView.View = System.Windows.Forms.View.Details;
+            // 
+            // pq_ID
+            // 
+            this.pq_ID.Text = "ID";
+            this.pq_ID.Width = 32;
+            // 
+            // pq_Name
+            // 
+            this.pq_Name.Text = "Name";
+            this.pq_Name.Width = 69;
+            // 
+            // pq_Priority
+            // 
+            this.pq_Priority.Text = "Priority";
+            // 
+            // pq_BurstTime
+            // 
+            this.pq_BurstTime.Text = "BurstTime";
+            // 
+            // pq_ArrivalTime
+            // 
+            this.pq_ArrivalTime.Text = "ArrivalTime";
+            this.pq_ArrivalTime.Width = 96;
             // 
             // label10
             // 
@@ -313,40 +337,46 @@
             this.cpu_BurstTime,
             this.cpu_ArrivalTime,
             this.cpu_ExcecutionTime});
-            this.activeProcessView.Location = new System.Drawing.Point(507, 80);
+            this.activeProcessView.Location = new System.Drawing.Point(458, 80);
             this.activeProcessView.Name = "activeProcessView";
-            this.activeProcessView.Size = new System.Drawing.Size(281, 159);
+            this.activeProcessView.Size = new System.Drawing.Size(333, 159);
             this.activeProcessView.TabIndex = 11;
             this.activeProcessView.UseCompatibleStateImageBehavior = false;
+            this.activeProcessView.View = System.Windows.Forms.View.Details;
             // 
             // cpu_ID
             // 
-            this.cpu_ID.DisplayIndex = 2;
+            this.cpu_ID.Text = "ID";
+            this.cpu_ID.Width = 25;
             // 
             // cpu_Name
             // 
-            this.cpu_Name.DisplayIndex = 0;
+            this.cpu_Name.Text = "Name";
+            this.cpu_Name.Width = 50;
             // 
             // cpu_Priority
             // 
-            this.cpu_Priority.DisplayIndex = 1;
+            this.cpu_Priority.Text = "Priority";
+            this.cpu_Priority.Width = 47;
             // 
             // cpu_BurstTime
             // 
-            this.cpu_BurstTime.DisplayIndex = 5;
+            this.cpu_BurstTime.Text = "BurstTime";
             // 
             // cpu_ArrivalTime
             // 
-            this.cpu_ArrivalTime.DisplayIndex = 3;
+            this.cpu_ArrivalTime.Text = "ArrivalTime";
+            this.cpu_ArrivalTime.Width = 65;
             // 
             // cpu_ExcecutionTime
             // 
-            this.cpu_ExcecutionTime.DisplayIndex = 4;
+            this.cpu_ExcecutionTime.Text = "ExecutionTime";
+            this.cpu_ExcecutionTime.Width = 82;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(507, 242);
+            this.label13.Location = new System.Drawing.Point(455, 242);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(100, 13);
             this.label13.TabIndex = 14;
@@ -355,7 +385,7 @@
             // clockTimeLabel
             // 
             this.clockTimeLabel.AutoSize = true;
-            this.clockTimeLabel.Location = new System.Drawing.Point(613, 242);
+            this.clockTimeLabel.Location = new System.Drawing.Point(561, 242);
             this.clockTimeLabel.Name = "clockTimeLabel";
             this.clockTimeLabel.Size = new System.Drawing.Size(13, 13);
             this.clockTimeLabel.TabIndex = 12;

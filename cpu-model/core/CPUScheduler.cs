@@ -10,17 +10,13 @@
 
         public void NextTime() {
             if (!ProcessQueue.Empty()) {
+                Cpu.IsFree = false;
                 Cpu.RunningProcess = ProcessQueue.Item();
                 Cpu.RunningProcess.SetActive();
                 ProcessQueue.Remove();
             } else {
                 Cpu.Clear();
             }
-
-            // update all waiting processes ?
-            //for (int i = ProcessQueue.Count() - 1; i >= 0; i -= 1) {
-
-            //}
         }
 
     }

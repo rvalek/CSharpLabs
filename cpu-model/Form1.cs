@@ -40,18 +40,37 @@ namespace cpu_model {
             enableConfigs();
 
             m = null;
-            resetStateViews();
+            clockTimeLabel.Text = "0";
+            clearProcessViews();
         }
 
         private void updateStateViews() {
             clockTimeLabel.Text = m.ClockGen.CurrentTime.ToString();
-            activeProcessView.Items.Add("Test1");
+            clearProcessViews();
+
+            foreach (Process p in m.ReadyQueue.ToArray()) {
+                readyProcessesView.Items.Add(new ListViewItem(processToArray(p)));
+            }
+            if (m.Cpu.RunningProcess != null) {
+                activeProcessView.Items.Add(new ListViewItem(processToArray(m.Cpu.RunningProcess)));
+            }
         }
 
-        private void resetStateViews() {
-            clockTimeLabel.Text = "0";
-            activeProcessView.Clear();
-            readyProcessesView.Clear();
+        private string[] processToArray(Process p) {
+            string[] arr = {
+                p.Id.ToString(),
+                p.Name,
+                p.Priority.ToString(),
+                p.BurstTime.ToString(),
+                p.ArrivalTime.ToString(),
+                p.ExecutionTime.ToString()
+                };
+            return arr;
+        }
+
+        private void clearProcessViews() {
+            activeProcessView.Items.Clear();
+            readyProcessesView.Items.Clear();
         }
 
         private void updateTimeLabel() {
