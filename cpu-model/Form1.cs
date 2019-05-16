@@ -26,6 +26,7 @@ namespace cpu_model {
 
             disableConfigs();
             nextButton.Enabled = true;
+            startButton.Enabled = false;
         }
 
         private void Next_Click(object sender, EventArgs e) {
@@ -35,6 +36,7 @@ namespace cpu_model {
 
         private void Reset_Click(object sender, EventArgs e) {
             nextButton.Enabled = false;
+            startButton.Enabled = true;
             enableConfigs();
 
             m = null;
@@ -43,14 +45,14 @@ namespace cpu_model {
 
         private void updateStateViews() {
             clockTimeLabel.Text = m.ClockGen.CurrentTime.ToString();
-            //
+            activeProcessView.Items.Add("Test1");
         }
 
         private void resetStateViews() {
             clockTimeLabel.Text = "0";
-            //
+            activeProcessView.Clear();
+            readyProcessesView.Clear();
         }
-
 
         private void updateTimeLabel() {
         }
@@ -82,7 +84,6 @@ namespace cpu_model {
             priorityMinUpDown.Enabled = false;
             priorityMaxUpDown.Enabled = false;
         }
-
     }
 
     public class InvalidConfigException : Exception {

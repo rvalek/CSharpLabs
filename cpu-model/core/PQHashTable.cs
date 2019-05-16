@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace cpu_model.core {
     internal class PQHashTable<TEntity> : PriorityQueue<TEntity> {
@@ -13,7 +12,7 @@ namespace cpu_model.core {
         }
 
         public override void Put(TEntity e) {
-            base.Put(e);
+            //base.Put(e);
 
             int index = e.GetHashCode() % body.Length;
 
@@ -23,18 +22,18 @@ namespace cpu_model.core {
 
             body[index].AddFirst(e);
 
-            topPriority = index < topPriority ? index : topPriority;
+            topPriority = index > topPriority ? index : topPriority;
             count += 1;
         }
 
         public override TEntity Item() {
-            base.Item();
+            //base.Item();
 
             return body[topPriority].Last.Value;
         }
 
         public override void Clear() {
-            base.Clear();
+            //base.Clear();
 
             for (int i = body.Length - 1; i >= 0; i -= 1) {
                 body[i] = null;
@@ -45,8 +44,7 @@ namespace cpu_model.core {
         }
 
         public override void Remove() {
-            // ??? DON'T DEAD OPEN INSIDE
-            base.Remove();
+            //base.Remove();
 
             if (body[topPriority].Count > 1) {
                 body[topPriority].RemoveLast();
@@ -60,12 +58,12 @@ namespace cpu_model.core {
         }
 
         public override int Count() {
-            base.Count();
+            //base.Count();
             return count;
         }
 
         private int findCurrentTop() {
-            for (int i = body.Length; i >= 0; i -= 1) {
+            for (int i = body.Length - 1; i >= 0; i -= 1) {
                 if (body[i] != null) {
                     return i;
                 }
@@ -74,12 +72,22 @@ namespace cpu_model.core {
             return -1;
         }
 
-        //public new bool Empty() {
-        //    return Count() == 0;
-        //}
+        public new bool Empty() {
+            return Count() == 0;
+        }
 
         public override TEntity[] ToArray() {
-            throw new NotImplementedException();
+            TEntity[] asArray = new TEntity[Count()];
+            int nextFreeIndex = 0;
+
+            foreach (LinkedList<TEntity> list in body) {
+                if (list != null) {
+                    foreach (TEntity item in list) {
+                        asArray[nextFreeIndex++] = item;
+                    }
+                }
+            }
+            return asArray;
         }
     }
 }

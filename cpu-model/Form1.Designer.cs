@@ -39,11 +39,22 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.startButton = new System.Windows.Forms.Button();
+            this.readyProcessesView = new System.Windows.Forms.ListView();
+            this.pq_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pq_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pq_Priority = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pq_BurstTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pq_ArrivalTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.activeProcessView = new System.Windows.Forms.ListView();
+            this.cpu_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cpu_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cpu_Priority = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cpu_BurstTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cpu_ArrivalTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cpu_ExcecutionTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label13 = new System.Windows.Forms.Label();
             this.clockTimeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.thresholdUpnDown)).BeginInit();
@@ -251,23 +262,29 @@
             this.nextButton.UseVisualStyleBackColor = true;
             this.nextButton.Click += new System.EventHandler(this.Next_Click);
             // 
-            // button3
+            // startButton
             // 
-            this.button3.Location = new System.Drawing.Point(632, 415);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Start";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Start_Click);
+            this.startButton.Location = new System.Drawing.Point(632, 415);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 6;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.Start_Click);
             // 
-            // listView1
+            // readyProcessesView
             // 
-            this.listView1.Location = new System.Drawing.Point(12, 80);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(489, 291);
-            this.listView1.TabIndex = 8;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.readyProcessesView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.pq_ID,
+            this.pq_Name,
+            this.pq_Priority,
+            this.pq_BurstTime,
+            this.pq_ArrivalTime});
+            this.readyProcessesView.Location = new System.Drawing.Point(12, 80);
+            this.readyProcessesView.Name = "readyProcessesView";
+            this.readyProcessesView.Size = new System.Drawing.Size(489, 291);
+            this.readyProcessesView.TabIndex = 8;
+            this.readyProcessesView.UseCompatibleStateImageBehavior = false;
             // 
             // label10
             // 
@@ -287,13 +304,44 @@
             this.label11.TabIndex = 10;
             this.label11.Text = "CPU";
             // 
-            // listView2
+            // activeProcessView
             // 
-            this.listView2.Location = new System.Drawing.Point(507, 80);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(281, 159);
-            this.listView2.TabIndex = 11;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.activeProcessView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.cpu_ID,
+            this.cpu_Name,
+            this.cpu_Priority,
+            this.cpu_BurstTime,
+            this.cpu_ArrivalTime,
+            this.cpu_ExcecutionTime});
+            this.activeProcessView.Location = new System.Drawing.Point(507, 80);
+            this.activeProcessView.Name = "activeProcessView";
+            this.activeProcessView.Size = new System.Drawing.Size(281, 159);
+            this.activeProcessView.TabIndex = 11;
+            this.activeProcessView.UseCompatibleStateImageBehavior = false;
+            // 
+            // cpu_ID
+            // 
+            this.cpu_ID.DisplayIndex = 2;
+            // 
+            // cpu_Name
+            // 
+            this.cpu_Name.DisplayIndex = 0;
+            // 
+            // cpu_Priority
+            // 
+            this.cpu_Priority.DisplayIndex = 1;
+            // 
+            // cpu_BurstTime
+            // 
+            this.cpu_BurstTime.DisplayIndex = 5;
+            // 
+            // cpu_ArrivalTime
+            // 
+            this.cpu_ArrivalTime.DisplayIndex = 3;
+            // 
+            // cpu_ExcecutionTime
+            // 
+            this.cpu_ExcecutionTime.DisplayIndex = 4;
             // 
             // label13
             // 
@@ -320,11 +368,11 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.clockTimeLabel);
-            this.Controls.Add(this.listView2);
+            this.Controls.Add(this.activeProcessView);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.readyProcessesView);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
@@ -371,13 +419,24 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button nextButton;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.ListView readyProcessesView;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView activeProcessView;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label clockTimeLabel;
+        private System.Windows.Forms.ColumnHeader cpu_ID;
+        private System.Windows.Forms.ColumnHeader cpu_Name;
+        private System.Windows.Forms.ColumnHeader cpu_Priority;
+        private System.Windows.Forms.ColumnHeader cpu_ArrivalTime;
+        private System.Windows.Forms.ColumnHeader cpu_ExcecutionTime;
+        private System.Windows.Forms.ColumnHeader cpu_BurstTime;
+        private System.Windows.Forms.ColumnHeader pq_ID;
+        private System.Windows.Forms.ColumnHeader pq_Name;
+        private System.Windows.Forms.ColumnHeader pq_Priority;
+        private System.Windows.Forms.ColumnHeader pq_BurstTime;
+        private System.Windows.Forms.ColumnHeader pq_ArrivalTime;
     }
 }
 
